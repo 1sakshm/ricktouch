@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Face Verification</title>
+    </head>
+    <body>
+        <h1>Face Authentication</h1>
+        <video id="face" width="640" height="480" autoplay></video><br>
+        <button id="verification button">Verify Your Face</button>
+        <p id="result"></p>
+        <script>
+            const video=document.getElementById("face"), button=document.getElementById("verification button"). result=document.getElementById("result");
+            navigator.mediaDevices.getUserMedia({video:true}).then(stream=>{video.srcObject=stream;});
+            button.onclick=function(){
+                const canvas=document.createElement('canvas');
+                canvas.width=video.videoWidth;
+                canvas.height=video.videoHeight;
+                canvas.getContext('2d').drawImage(video,0,0);
+                const dataURL=canvas.toDataURL('image/png');
+                fetch('/verify',{method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({image: dataURL})})
+                .then(res=>res.json())
+                .then(data=>{if(data.match){result.textContext="lmao face matched. enjoy!";}else{result.textContext=data.error||"get away. you're not allowed!";}});
+            };
+        </script>
+    </body>
+</html>
