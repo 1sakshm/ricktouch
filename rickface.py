@@ -2,7 +2,7 @@ from flask import Flask,request,jsonify,render_template_string
 import face_recognition, numpy as np, cv2, base64, os
 app=Flask(__name__)
 app.secret_key='yes'
-sip="C:\\Users\\Saksham\\ricktouch\\source.jpg"
+sip="C:\\Users\\Saksham\\ricktouch\\image.png"
 if not os.path.exists(sip): raise FileNotFoundError(f"source image not found at {sip}")
 si=face_recognition.load_image_file(sip)
 se=face_recognition.face_encodings(si)
