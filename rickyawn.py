@@ -27,4 +27,16 @@ while True:
         shape=face_utils.shape_to_np(shape)
         mouth=shape[ms:me]
         marr=mar(mouth)
-        
+        cv2.drawContours(frame,[cv2.convexHull(mouth)],-1,(0,255,0),1)
+        if marr>mart and (time.time()-lyt)>yc:
+            print("lmao why you yawning? you sleepy already? listen to this!")
+            webbrowser.open(link)
+            lyt=time.time()
+        cv2.putText(frame, f"MAR:{marr:.2f}",(30,30),cv2.FONT_ITALIC,0.7,(0,0,225),2)
+    cv2.imshow("yawn if you're feeling sleepy",frame)
+    if cv2.waitKey(1)&0xFF==27:break
+cam.release()
+cv2.destroyAllWindows()
+
+
+
