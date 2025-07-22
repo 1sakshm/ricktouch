@@ -25,7 +25,7 @@ while True:
             cv2.circle(frame,p1,12,(0,255,0) if tou else (0,0,255), -1)
             cv2.circle(frame,p2,12,(0,255,0) if tou else (0,0,255), -1)
             if tou and not triggered and (time.time()-ltt>cool):
-                wb.open('hhttps://tinyurl.com/surpandrise')
+                wb.open('https://tinyurl.com/surpandrise')
                 triggered=True
                 ltt=time.time()
             if not tou: triggered=False
