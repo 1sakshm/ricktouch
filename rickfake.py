@@ -4,14 +4,13 @@ import mediapipe as mp
 import time
 import pyttsx3
 import webbrowser
-import os
 
 engine = pyttsx3.init()
 def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-rick_img_path = 'img.png'
+rick_img_path = 'rick_astley_face.png'
 rick_face = cv2.imread(rick_img_path, cv2.IMREAD_UNCHANGED)
 if rick_face is None:
     raise FileNotFoundError("Please add a transparent Rick Astley face image as 'rick_astley_face.png'.")
@@ -68,8 +67,8 @@ while cap.isOpened():
             start_time = time.time()
         elif time.time() - start_time > 4:
             speak("You have become the Rick.")
-            time.sleep(10)
-            webbrowser.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+            time.sleep(1.5)
+            webbrowser.open("https://tinyurl.com/surpandrise")
             rickrolled = True
 
     cv2.imshow("Rick Face Swap", frame)
