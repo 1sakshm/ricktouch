@@ -4,13 +4,13 @@ from scipy.spatial import distance as dist
 earth=0.21
 cf=3
 nbl=10
-link=""
+link="https://tinyurl.com/surpandrise"
 eng=pyttsx3.init()
 yap=lambda t: (eng.say(t), eng.runAndWait())
 detect=dlib.get_frontal_face_detector()
 predict=dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
-(ise,ie)=face_utils.FACIAL_LANDMARKS_IDXS("left_eye")
-(rs,re)=face_utils.FACIAL_LANDMARKS_IDXS("right_eye")
+(ise,ie)=face_utils.FACIAL_LANDMARKS_IDXS["left_eye"]
+(rs,re)=face_utils.FACIAL_LANDMARKS_IDXS["right_eye"]
 def ear(eye):
     a=dist.euclidean(eye[1],eye[5])
     b=dist.euclidean(eye[2],eye[4])
@@ -37,5 +37,19 @@ while True:
         eyr=(leftE+rightE)/2.0
         cv2.putText(frame,f"EAR:{eyr:2f}",(10,30),cv2.FONT_ITALIC,0.7,(255,255,0),2)
         if eyr<earth:bc+=1
-        if bc>=cf:lbt=time.time()
-        bc=0
+        else:
+            if bc>=cf:lbt=time.time()
+            bc=0
+        if time.time()-lbt>nbl and not rickrolled:
+            print("you didn't blink in time. game over")
+            yap("you didn't blink in time. you lose.")
+            time.sleep(1)
+            webbrowser.open(link)
+            rickrolled=True
+            break
+    cv2.imshow("blink fast",frame)
+    if cv2.waitKey(1)&0xFF==27 or rickrolled:break
+cam.release()
+cv2.destroyAllWindows()
+    
+        
